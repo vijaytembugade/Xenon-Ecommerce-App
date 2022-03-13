@@ -1,0 +1,106 @@
+.carousel {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+.carousel > img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.carousel .corousel-text {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.offer-text {
+  text-align: center;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.introduction-text {
+  width: 40%;
+  text-align: center;
+  padding: 1rem;
+}
+
+.introduction-heading {
+  padding: 1rem;
+  border-bottom: 1px solid var(--gray-color);
+  text-align: center;
+}
+
+/* arrivals styles*/
+.arrivals {
+  display: flex;
+  width: 20rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.5s;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background-color: var(--classic-color);
+  margin: 1rem;
+}
+
+.arrivals > img {
+  width: 7rem;
+  height: 7rem;
+}
+
+/* brand on homepage styling */
+
+.featured-brand {
+  font-size: 32px;
+  padding: 2rem;
+}
+
+.brand-logos {
+  width: 30rem;
+}
+
+.brand-logos > div {
+  width: 150px;
+  transition: all 0.5s;
+}
+.brand-logos > div:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  cursor: pointer;
+}
+
+/* footer */
+footer {
+  width: 100%;
+  height: 6rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .carousel .corousel-text {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .introduction-text {
+    width: 80%;
+  }
+}
