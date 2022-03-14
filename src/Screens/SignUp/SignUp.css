@@ -1,0 +1,16 @@
+.signup-page-container {
+  justify-content: space-evenly;
+}
+
+.signup-img-container {
+  width: 35rem;
+  padding: 2rem;
+}
+
+.signup-form-container {
+  padding: 2rem;
+  flex-basis: 30rem;
+}
+.link-to-login {
+  padding: 0.5rem;
+}
