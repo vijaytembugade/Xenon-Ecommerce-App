@@ -1,0 +1,34 @@
+.filter-container {
+  background: var(--classic-color);
+  position: sticky;
+  top: 5rem;
+  bottom: 0;
+  flex: 0.2;
+  height: 100vh;
+  padding: 1rem 1rem 10rem 1rem;
+  overflow-y: hidden;
+}
+
+.filter-container:hover {
+  overflow-y: scroll;
+}
+
+.filter-container::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.filter-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px transparent;
+  border-radius: 10px;
+}
+
+.category-container,
+.rating-container,
+.sort-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.slider {
+  width: 15rem;
+}

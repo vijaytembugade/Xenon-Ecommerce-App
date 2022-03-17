@@ -1,0 +1,42 @@
+footer {
+  width: 100%;
+  height: fit-content;
+  margin-top: 3rem;
+  background-color: #353535;
+  padding: 5rem 10rem;
+}
+
+footer > div:last-child {
+  margin-left: auto;
+}
+
+.sitemap-container {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.sitemap-container > div:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.social-media-icons > span > a > img {
+  width: 30px;
+}
+
+.social-media-icons > span {
+  padding: 0 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .sitemap-container {
+    display: none;
+  }
+  footer {
+    padding: 1rem;
+  }
+  footer > div:last-child {
+    margin-left: 0;
+  }
+}
