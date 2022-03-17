@@ -2,11 +2,6 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
-  let activeStyle = {
-    textDecoration: "bold",
-  };
-
-  let activeClassName = "underline";
   return (
     <div>
       <nav className="text-dark ">
@@ -17,41 +12,26 @@ const Header = () => {
         </div>
         <ul className="nav-menu">
           <li>
-            {/* <Link to="/wishlist" className="nav-item">
-              <span className="material-icons"> favorite </span>
-              <span className="badge badge-round secondary-bg-color">5</span>
-            </Link> */}
-            <NavLink
-              to="/wishlist"
-              className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-              }
-            >
+            <NavLink to="/wishlist" className="nav-item">
               <span className="material-icons"> favorite </span>
               <span className="badge badge-round secondary-bg-color">5</span>
             </NavLink>
           </li>
           <li>
-            <Link to="/cart" className="nav-item">
+            <NavLink to="/cart" className="nav-item">
               <span className="material-icons"> shopping_cart </span>
               <span className="badge badge-round secondary-bg-color">0</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/products" className="nav-item">
+            <NavLink to="/products" className="nav-item">
               Products
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/signup"
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            >
+            <NavLink to="/signup" className="nav-item">
               Signup
             </NavLink>
-            {/* <Link to="/signup" className="nav-item">
-              Sign up
-            </Link> */}
           </li>
         </ul>
 
