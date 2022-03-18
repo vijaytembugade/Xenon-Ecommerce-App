@@ -1,15 +1,34 @@
-import React from "react";
 import "./ProductList.css";
-import { products } from "../../data";
 import Card from "../Card/Card";
+import {
+  brandFilter,
+  categoryFilter,
+  priceFilter,
+  ratingFilter,
+  sizeFilter,
+  sortByFilter,
+} from "../../Utils";
+import { useFilter, useProducts } from "../../Contexts";
 
 const ProductList = () => {
+  const { state } = useFilter();
+  const { products } = useProducts();
+  const { sortBy, categories, brand, size, rating, price } = state;
+
+  const sortedProducts = sortByFilter(products, sortBy);
+  const CategoryFilteredProducts = categoryFilter(sortedProducts, categories);
+  const brandFilteredProducts = brandFilter(CategoryFilteredProducts, brand);
+  const sizedFilterProducts = sizeFilter(brandFilteredProducts, size);
+  const ratingFilteredProducts = ratingFilter(sizedFilterProducts, rating);
+  const priceFilteredProducts = priceFilter(ratingFilteredProducts, price);
+
+  const filteredProducts = priceFilteredProducts;
   return (
     <div className="product-list-container">
-      <h2>All Products ({products.length})</h2>
+      <h2>All Products ({filteredProducts.length})</h2>
       <div className="product-list flex-container">
-        {products &&
-          products.map((product) => {
+        {filteredProducts &&
+          filteredProducts.map((product) => {
             return <Card product={product} key={product.id} />;
           })}
       </div>
