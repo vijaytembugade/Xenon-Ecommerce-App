@@ -14,14 +14,16 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductListing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-      </Routes>
+      <div className="main-container">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductListing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+        </Routes>
+      </div>
       <Footer />
       <Routes>
         <Route path="/mock" element={<Mockman />} />
