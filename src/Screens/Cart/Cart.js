@@ -5,8 +5,9 @@ import { useCart } from "../../Contexts";
 import "./Cart.css";
 
 function Cart() {
-  const { state } = useCart();
-  const { cartList } = state;
+  const {
+    state: { cartList },
+  } = useCart();
 
   return (
     <div className="flex-container">
