@@ -37,7 +37,7 @@ const Card = ({ product }) => {
     }
   };
 
-  const handlewishlist = async () => {
+  const handleAddToWishlist = async (product) => {
     if (authState.isLoggedIn) {
       try {
         const responce = await axios.post(
@@ -128,7 +128,7 @@ const Card = ({ product }) => {
           ) : (
             <span
               className="material-icons"
-              onClick={() => handlewishlist(product)}
+              onClick={() => handleAddToWishlist(product)}
             >
               favorite_border
             </span>

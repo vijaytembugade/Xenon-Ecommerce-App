@@ -1,14 +1,14 @@
 import axios from "axios";
 import React from "react";
 import { useAuth, useCart, useWishList } from "../../Contexts";
-
+import Rating from "../Rating/Rating";
 import { useNavigate } from "react-router-dom";
 
 const WishListCart = ({ product }) => {
   const navigate = useNavigate();
   const { state: authState } = useAuth();
   const { dispatch: wishListdispatch } = useWishList();
-  const { dispatch: cartDispatch } = useCart();
+  const { state: cartState, dispatch: cartDispatch } = useCart();
 
   const handleDeleteFromWishList = async (id) => {
     if (authState.isLoggedIn) {
@@ -29,17 +29,20 @@ const WishListCart = ({ product }) => {
   };
 
   const handleAddToCart = async (product) => {
-    handleDeleteFromWishList(product._id);
     if (authState.isLoggedIn) {
       try {
-        const responce = await axios.post(
-          "/api/user/cart",
-          { product },
-          {
-            headers: { authorization: authState.token },
-          }
-        );
-        cartDispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+        if (cartState.cartList.find((item) => item._id === product._id)) {
+          throw new Error("Item already in cart");
+        } else {
+          const responce = await axios.post(
+            "/api/user/cart",
+            { product },
+            {
+              headers: { authorization: authState.token },
+            }
+          );
+          cartDispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+        }
       } catch (err) {
         console.log(err);
       }
@@ -58,6 +61,9 @@ const WishListCart = ({ product }) => {
           <span className="title"> {product.title} </span>
           <span className="subtitle"> {product.subtitle} </span>
           <div className="card-description">
+            <div className="rating">
+              <Rating value={product.rating} />
+            </div>
             <span>
               Price : <strike>{product.price}</strike>
               {"  "}
