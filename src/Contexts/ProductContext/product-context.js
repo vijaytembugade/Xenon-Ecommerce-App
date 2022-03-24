@@ -8,8 +8,12 @@ const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data.products);
+      try {
+        const { data } = await axios.get("/api/products");
+        setProducts(data.products);
+      } catch (err) {
+        console.log(err.message);
+      }
     };
     fetchData();
   }, []);

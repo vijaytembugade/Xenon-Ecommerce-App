@@ -8,11 +8,12 @@ import {
   sizeFilter,
   sortByFilter,
 } from "../../Utils";
-import { useFilter, useProducts } from "../../Contexts";
+import { useCart, useFilter, useProducts } from "../../Contexts";
 
 const ProductList = () => {
   const { state } = useFilter();
   const { products } = useProducts();
+  const { cartList } = useCart();
   const { sortBy, categories, brand, size, rating, price } = state;
 
   const sortedProducts = sortByFilter(products, sortBy);
@@ -23,6 +24,7 @@ const ProductList = () => {
   const priceFilteredProducts = priceFilter(ratingFilteredProducts, price);
 
   const filteredProducts = priceFilteredProducts;
+
   return (
     <div className="product-list-container">
       <h2>All Products ({filteredProducts.length})</h2>

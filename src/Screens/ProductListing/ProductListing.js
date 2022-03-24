@@ -5,7 +5,7 @@ import "./ProductListing.css";
 
 const ProductListing = () => {
   return (
-    <div className="product-listing-container main-container">
+    <div className="product-listing-container ">
       <FilterSidebar />
       <ProductList />
     </div>

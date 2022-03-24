@@ -1,7 +1,15 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useCart } from "../../Contexts";
+
+import "./Header.css";
 
 const Header = () => {
+  const { state } = useCart();
+  const { cartList } = state;
+
+  let activeClassName = "active-nav-item";
+
   return (
     <div>
       <nav className="text-dark ">
@@ -12,24 +20,48 @@ const Header = () => {
         </div>
         <ul className="nav-menu">
           <li>
-            <NavLink to="/wishlist" className="nav-item">
+            <NavLink
+              to="/wishlist"
+              className={({ isActive }) =>
+                isActive ? "nav-item " + activeClassName : "nav-item "
+              }
+            >
               <span className="material-icons"> favorite </span>
-              <span className="badge badge-round secondary-bg-color">5</span>
+              <span className="badge badge-round secondary-bg-color dark-text">
+                5
+              </span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/cart" className="nav-item">
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                isActive ? "nav-item " + activeClassName : "nav-item "
+              }
+            >
               <span className="material-icons"> shopping_cart </span>
-              <span className="badge badge-round secondary-bg-color">0</span>
+              <span className="badge badge-round secondary-bg-color dark-text">
+                {cartList.length !== 0 ? cartList.length : 0}
+              </span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/products" className="nav-item">
+            <NavLink
+              to="/products"
+              className={({ isActive }) =>
+                isActive ? "nav-item " + activeClassName : "nav-item "
+              }
+            >
               Products
             </NavLink>
           </li>
           <li>
-            <NavLink to="/signup" className="nav-item">
+            <NavLink
+              to="/signup"
+              className={({ isActive }) =>
+                isActive ? "nav-item " + activeClassName : "nav-item "
+              }
+            >
               Signup
             </NavLink>
           </li>
@@ -44,18 +76,26 @@ const Header = () => {
             <span className="material-icons md-36"> close </span>
             Close
           </div>
-          <a href="#" className="nav-item">
+          <a href="#" className={({ isActive }) =>
+                isActive ? "nav-item" + { activeClassName } : "nav-item"
+              }>
             {" "}
             Login{" "}
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className={({ isActive }) =>
+                isActive ? "nav-item" + { activeClassName } : "nav-item"
+              }>
             Sign Up
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className={({ isActive }) =>
+                isActive ? "nav-item" + { activeClassName } : "nav-item"
+              }>
             <span className="material-icons"> shopping_cart </span>
             <span className="badge badge-round secondary-bg-color">0</span>
           </a>
-          <a href="" className="nav-item">
+          <a href="" className={({ isActive }) =>
+                isActive ? "nav-item" + { activeClassName } : "nav-item"
+              }>
             <span className="material-icons"> shopping_cart </span>
             <span className="badge badge-round secondary-bg-color">0</span>
           </a> */}

@@ -5,7 +5,7 @@ import "./HomePage.css";
 const HomePage = () => {
   return (
     <>
-      <div className="main-container">
+      <div className="">
         <div className="carousel">
           <img
             src="/assets/homepage/opened-notebook.webp"
