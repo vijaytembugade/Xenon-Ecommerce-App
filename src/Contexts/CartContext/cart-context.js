@@ -16,16 +16,20 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     async function getCartItems() {
-      try {
-        const responce = await axios.get("/api/user/cart", {
-          headers: {
-            authorization: authState.token,
-          },
-        });
+      if (authState.isLoggedIn) {
+        try {
+          const responce = await axios.get("/api/user/cart", {
+            headers: {
+              authorization: authState.token,
+            },
+          });
 
-        dispatch({ type: "SET_CART", payload: [...responce.data.cart] });
-      } catch (err) {
-        console.log(err);
+          dispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        dispatch({ type: "SET_CART", payload: [] });
       }
     }
 
