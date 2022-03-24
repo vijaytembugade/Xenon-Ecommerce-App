@@ -1,15 +1,20 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth, useCart } from "../../Contexts";
+import { useAuth, useCart, useWishList } from "../../Contexts";
 import Rating from "../Rating/Rating";
 import "./Card.css";
 
 const Card = ({ product }) => {
-  const { state, dispatch } = useCart();
+  const {
+    state: { cartList },
+    dispatch,
+  } = useCart();
   const { state: authState } = useAuth();
-
-  const { cartList } = state;
+  const {
+    state: { wishList },
+    dispatch: wishListdispatch,
+  } = useWishList();
 
   let navigate = useNavigate();
 
@@ -23,8 +28,47 @@ const Card = ({ product }) => {
             headers: { authorization: authState.token },
           }
         );
-        console.log(responce);
         dispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const handlewishlist = async () => {
+    if (authState.isLoggedIn) {
+      try {
+        const responce = await axios.post(
+          "/api/user/wishlist",
+          { product },
+          {
+            headers: { authorization: authState.token },
+          }
+        );
+        wishListdispatch({
+          type: "MOVE_TO_WISHLIST",
+          payload: [...responce.data.wishlist],
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const handleRemoveFromWishlist = async (id) => {
+    if (authState.isLoggedIn) {
+      try {
+        const responce = await axios.delete(`/api/user/wishlist/${id}`, {
+          headers: { authorization: authState.token },
+        });
+        wishListdispatch({
+          type: "MOVE_TO_WISHLIST",
+          payload: [...responce.data.wishlist],
+        });
       } catch (err) {
         console.log(err);
       }
@@ -73,7 +117,22 @@ const Card = ({ product }) => {
           )}
         </div>
         <div className="card-dismiss light-bg-color">
-          <span className="material-icons "> favorite_border </span>
+          {authState.isLoggedIn &&
+          wishList.find((item) => item._id === product._id) ? (
+            <span
+              className="material-icons danger-text"
+              onClick={() => handleRemoveFromWishlist(product._id)}
+            >
+              favorite
+            </span>
+          ) : (
+            <span
+              className="material-icons"
+              onClick={() => handlewishlist(product)}
+            >
+              favorite_border
+            </span>
+          )}
         </div>
       </div>
     </div>

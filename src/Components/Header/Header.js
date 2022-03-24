@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useAuth, useCart } from "../../Contexts";
+import { useAuth, useCart, useWishList } from "../../Contexts";
 
 import "./Header.css";
 
@@ -9,6 +9,9 @@ const Header = () => {
     state: { cartList },
   } = useCart();
   const { state: authState, dispatch } = useAuth();
+  const {
+    state: { wishList },
+  } = useWishList();
 
   let activeClassName = "active-nav-item";
 
@@ -35,7 +38,7 @@ const Header = () => {
             >
               <span className="material-icons"> favorite </span>
               <span className="badge badge-round secondary-bg-color dark-text">
-                5
+                {authState.isLoggedIn ? wishList.length : 0}
               </span>
             </NavLink>
           </li>
