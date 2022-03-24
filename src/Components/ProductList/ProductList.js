@@ -8,12 +8,12 @@ import {
   sizeFilter,
   sortByFilter,
 } from "../../Utils";
-import { useCart, useFilter, useProducts } from "../../Contexts";
+import { useFilter, useProducts } from "../../Contexts";
 
 const ProductList = () => {
   const { state } = useFilter();
   const { products } = useProducts();
-  const { cartList } = useCart();
+
   const { sortBy, categories, brand, size, rating, price } = state;
 
   const sortedProducts = sortByFilter(products, sortBy);

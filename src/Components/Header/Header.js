@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useCart } from "../../Contexts";
+import { useAuth, useCart } from "../../Contexts";
 
 import "./Header.css";
 
 const Header = () => {
-  const { state } = useCart();
-  const { cartList } = state;
+  const {
+    state: { cartList },
+  } = useCart();
+  const { state: authState, dispatch } = useAuth();
 
   let activeClassName = "active-nav-item";
+
+  function handleLogout() {
+    localStorage.removeItem("AUTH_TOKEN");
+    dispatch({ type: "LOGOUT" });
+  }
 
   return (
     <div>
@@ -41,7 +48,9 @@ const Header = () => {
             >
               <span className="material-icons"> shopping_cart </span>
               <span className="badge badge-round secondary-bg-color dark-text">
-                {cartList.length !== 0 ? cartList.length : 0}
+                {cartList.length !== 0 && authState.isLoggedIn
+                  ? cartList.length
+                  : 0}
               </span>
             </NavLink>
           </li>
@@ -55,16 +64,40 @@ const Header = () => {
               Products
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/signup"
-              className={({ isActive }) =>
-                isActive ? "nav-item " + activeClassName : "nav-item "
-              }
-            >
-              Signup
-            </NavLink>
-          </li>
+          {!authState.isLoggedIn && (
+            <li>
+              <NavLink
+                to="/signup"
+                className={({ isActive }) =>
+                  isActive ? "nav-item " + activeClassName : "nav-item "
+                }
+              >
+                Signup
+              </NavLink>
+            </li>
+          )}
+          {!authState.isLoggedIn && (
+            <li>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive ? "nav-item " + activeClassName : "nav-item "
+                }
+              >
+                Login
+              </NavLink>
+            </li>
+          )}
+          {authState.isLoggedIn && (
+            <li>
+              <button
+                className="btn btn-ternary-outline"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
 
         <div id="hamburger" className="hamburger">
