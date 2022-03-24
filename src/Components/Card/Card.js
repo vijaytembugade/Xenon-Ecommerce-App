@@ -1,26 +1,37 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../Contexts";
+import { useAuth, useCart } from "../../Contexts";
 import Rating from "../Rating/Rating";
 import "./Card.css";
 
 const Card = ({ product }) => {
   const { state, dispatch } = useCart();
+  const { state: authState } = useAuth();
 
   const { cartList } = state;
 
   let navigate = useNavigate();
 
-  const inCartProduct = cartList.reduce((acc, curr) => {
-    return [...acc, curr.product.id];
-  }, []);
-
-  function handleAddToCart(product) {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: { product: product, quantity: 1 },
-    });
-  }
+  const handleAddToCart = async (product) => {
+    if (authState.isLoggedIn) {
+      try {
+        const responce = await axios.post(
+          "/api/user/cart",
+          { product },
+          {
+            headers: { authorization: authState.token },
+          }
+        );
+        console.log(responce);
+        dispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div key={product.id}>
@@ -43,7 +54,8 @@ const Card = ({ product }) => {
           </div>
         </div>
         <div className="card-footer">
-          {inCartProduct.includes(product.id) ? (
+          {authState.isLoggedIn &&
+          cartList.find((item) => item._id === product._id) ? (
             <button
               className="btn btn-block btn-ternary-outline"
               onClick={() => navigate("/cart")}

@@ -9,6 +9,7 @@ import Login from "./Screens/Login/Login";
 import Wishlist from "./Screens/Wishlist/Wishlist";
 import Cart from "./Screens/Cart/Cart";
 import Mockman from "mockman-js";
+import PrivateRoutes from "./Components/PrivateRoutes/PrivateRoutes";
 
 function App() {
   return (
@@ -20,8 +21,22 @@ function App() {
           <Route path="/products" element={<ProductListing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route
+            path="/cart"
+            element={
+              <PrivateRoutes>
+                <Cart />
+              </PrivateRoutes>
+            }
+          ></Route>
+          <Route
+            path="/cart"
+            element={
+              <PrivateRoutes>
+                <Wishlist />
+              </PrivateRoutes>
+            }
+          ></Route>
         </Routes>
       </div>
       <Footer />

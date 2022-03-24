@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 export const products = [
   {
-    _id: 1,
+    _id: uuid(),
     title: "Daily Appointment Poket Black Book ",
     subtitle: "TRU RED",
     rating: 4.5,
@@ -28,7 +28,7 @@ export const products = [
     slug: "daily-apointment-pocket-book",
   },
   {
-    _id: 2,
+    _id: uuid(),
     title: " Black N' Red Business Notebook",
     subtitle: "Black N' Red",
     rating: 4.0,
@@ -49,7 +49,7 @@ export const products = [
     slug: "black-n-red-business-notebook",
   },
   {
-    _id: 3,
+    _id: uuid(),
     title: " Black N' Red Professional Diary (with Spiral)",
     subtitle: "Black N' Red",
     rating: 4.0,
@@ -70,7 +70,7 @@ export const products = [
     slug: "black-n-red-professional-notebook",
   },
   {
-    _id: 4,
+    _id: uuid(),
     title: " Black N' Red Professional Notebook",
     subtitle: "Black N' Red",
     rating: 3.5,
@@ -91,7 +91,7 @@ export const products = [
     slug: "black-n-red-professional-notebook-without-spiral",
   },
   {
-    _id: 10,
+    _id: uuid(),
     title: "Cambridge Limited Professional Notebook",
     subtitle: "Cambridge",
     rating: 2.5,
@@ -112,7 +112,7 @@ export const products = [
     slug: "cambridge-professional-notebook",
   },
   {
-    _id: 5,
+    _id: uuid(),
     title: "JAM Paper Hardcover Notebook with Elastic ",
     subtitle: "JAM Paper",
     rating: 3.5,
@@ -133,7 +133,7 @@ export const products = [
     slug: "jam-paper-hardcover-notebook",
   },
   {
-    _id: 6,
+    _id: uuid(),
     title: "JAM Paper® Hardcover Notebook with Design ",
     subtitle: "JAM Paper",
     rating: 4,
@@ -154,7 +154,7 @@ export const products = [
     slug: "jam-paper-hardcover-notebook-with-design",
   },
   {
-    _id: 7,
+    _id: uuid(),
     title: "Moleskine Cahier Cardboard Diary",
     subtitle: "Moleskine",
     rating: 5,
@@ -175,7 +175,7 @@ export const products = [
     slug: "moleskine-cahier-cardboard-diary",
   },
   {
-    _id: 8,
+    _id: uuid(),
     title: "Moleskine Evernote Pocket Soft Pocket Book",
     subtitle: "Moleskine",
     rating: 5,
@@ -196,7 +196,7 @@ export const products = [
     slug: "moleskine-evernote-pocket-soft-pocket-book",
   },
   {
-    _id: 9,
+    _id: uuid(),
     title: "Moleskine Pocket Subject Professional Pocket Book",
     subtitle: "Moleskine",
     rating: 3.5,
@@ -217,7 +217,7 @@ export const products = [
     slug: "moleskine-pocket-subject-professional-poket-book",
   },
   {
-    _id: 11,
+    _id: uuid(),
     title: "Rocketbook Fusion Smart Notebook",
     subtitle: "Rocketbook",
     rating: 3.5,
@@ -238,7 +238,7 @@ export const products = [
     slug: "rocketbook-fusion-smart-notebook",
   },
   {
-    _id: 12,
+    _id: uuid(),
     title: "Rocketbook Fusion Smart Notebook (Chocolate)",
     subtitle: "Rocketbook",
     rating: 4.5,
@@ -259,7 +259,7 @@ export const products = [
     slug: "rocketbook-fusion-smart-notebook-chocolate",
   },
   {
-    _id: 13,
+    _id: uuid(),
     title: "Rocketbook Wave Smart Reusable Notebook",
     subtitle: "Rocketbook",
     rating: 4.5,
@@ -280,7 +280,7 @@ export const products = [
     slug: "rocketbook-wave-smart-reusable-notebook",
   },
   {
-    _id: 18,
+    _id: uuid(),
     title: "Staples Accel 3-Subject Notebook",
     subtitle: "Staple",
     rating: 4,
@@ -301,7 +301,7 @@ export const products = [
     slug: "staples-accel-3-subject-notebook",
   },
   {
-    _id: 14,
+    _id: uuid(),
     title: "Staples Hard Journal/Diary",
     subtitle: "Staple",
     rating: 4.5,
@@ -322,7 +322,7 @@ export const products = [
     slug: "staples-hard-journal",
   },
   {
-    _id: 15,
+    _id: uuid(),
     title: "TRU RED™ Large Explore Notebook",
     subtitle: "TRU RED",
     rating: 4,
@@ -343,7 +343,7 @@ export const products = [
     slug: "tru-red-large-explore-notebook",
   },
   {
-    _id: 16,
+    _id: uuid(),
     title: "TRU RED™ Premium 5-Division Notebook",
     subtitle: "TRU RED",
     rating: 4,
@@ -364,7 +364,7 @@ export const products = [
     slug: "tru-red-premium-5-subject-notebook",
   },
   {
-    _id: 17,
+    _id: uuid(),
     title: "TRU RED™ Small Hard Cover Ruled Diary",
     subtitle: "TRU RED",
     rating: 4,
