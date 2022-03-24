@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { wishlistReducer } from "../../Reducers";
 import { useAuth } from "../AuthContext/auth-context";
 
 const WishListContenxt = createContext();
@@ -9,13 +10,6 @@ const WishListProvider = ({ children }) => {
   const initialState = {
     wishList: [],
     loading: false,
-  };
-  const wishListReducer = (state, action) => {
-    switch (action.type) {
-      case "MOVE_TO_WISHLIST": {
-        return { ...state, wishList: action.payload };
-      }
-    }
   };
 
   useEffect(() => {
@@ -46,7 +40,7 @@ const WishListProvider = ({ children }) => {
     getWishListdata();
   }, [authState.token]);
 
-  const [state, dispatch] = useReducer(wishListReducer, initialState);
+  const [state, dispatch] = useReducer(wishlistReducer, initialState);
 
   return (
     <WishListContenxt.Provider value={{ state, dispatch }}>
