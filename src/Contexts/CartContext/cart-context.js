@@ -30,7 +30,7 @@ const CartProvider = ({ children }) => {
     }
 
     getCartItems();
-  }, []);
+  }, [authState.token]);
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>
