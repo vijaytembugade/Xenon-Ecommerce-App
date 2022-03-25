@@ -32,11 +32,11 @@ const OrderDetails = () => {
           </div>
           <div className="price-details">
             <div>Discount</div>
-            <div>Rs. {discount}</div>
+            <div className="secondary-text">- Rs. {discount}</div>
           </div>
           <div className="price-details">
             <div>Discounted Price</div>
-            <div>Rs. {totalDisountedPrice}</div>
+            <div> Rs. {totalDisountedPrice}</div>
           </div>
           <div className="price-details">
             <div>Delivery Charges</div>

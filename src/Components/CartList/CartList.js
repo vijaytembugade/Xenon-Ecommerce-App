@@ -1,10 +1,11 @@
 import axios from "axios";
 import React from "react";
-import { useAuth, useCart } from "../../Contexts";
+import { useAuth, useCart, useWishList } from "../../Contexts";
 
 function CartList({ item }) {
   const { dispatch } = useCart();
   const { state: authState } = useAuth();
+  const { state: wishListState, dispatch: wishlistDispatch } = useWishList();
 
   async function handleRemoveFromCart(id) {
     try {
@@ -60,6 +61,32 @@ function CartList({ item }) {
     }
   }
 
+  async function handleMoveToWishList(product) {
+    try {
+      if (wishListState.wishlist.find((item) => item._id === product._id)) {
+        throw new Error("Product is already in wishlist!");
+      }
+      const responce = await axios.post(
+        `/api/user/wishlist`,
+        {
+          product,
+        },
+        {
+          headers: {
+            authorization: authState.token,
+          },
+        }
+      );
+
+      wishlistDispatch({
+        type: "MOVE_TO_WISHLIST",
+        payload: [...responce.data.wishlist],
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="cart-item">
@@ -106,7 +133,10 @@ function CartList({ item }) {
               delete
             </i>
           </button>
-          <button className="btn btn-primary-outline btn-float">
+          <button
+            className="btn btn-primary-outline btn-float"
+            onClick={() => handleMoveToWishList(item)}
+          >
             <i className="material-icons">favorite</i>
           </button>
         </div>

@@ -30,7 +30,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/cart"
+            path="/wishlist"
             element={
               <PrivateRoutes>
                 <Wishlist />
