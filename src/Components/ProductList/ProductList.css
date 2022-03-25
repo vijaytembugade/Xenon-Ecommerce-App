@@ -6,3 +6,13 @@
   justify-content: flex-start;
   gap: 0;
 }
+
+@media only screen and (max-width: 950px) {
+  .product-list-container {
+    flex: 1;
+    padding: 0rem 1rem;
+  }
+  .product-list {
+    justify-content: center;
+  }
+}
