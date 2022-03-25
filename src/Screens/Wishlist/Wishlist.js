@@ -11,6 +11,9 @@ const Wishlist = () => {
   return (
     <div className="wishlist-container">
       <h2>My wishlist</h2>
+      <div class="wishlist-count">
+        {wishList.length === 0 && "Your wishlist is Empty!"}
+      </div>
       <div className="wishlist-products">
         {wishList.map((product) => {
           return <WishListCart product={product} />;
