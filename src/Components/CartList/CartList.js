@@ -113,7 +113,7 @@ function CartList({ item }) {
             >
               -
             </span>
-            <span className="pd-1">{item.qty}</span>
+            <span className="quantity-value">{item.qty}</span>
             <span
               className="btn btn-secondary-outline btn-small btn-float"
               onClick={() => {

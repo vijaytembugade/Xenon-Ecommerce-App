@@ -1,3 +1,9 @@
 .product-listing-container {
   display: flex;
 }
+@media only screen and (max-width: 950px) {
+  .product-listing-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

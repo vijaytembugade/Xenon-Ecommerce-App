@@ -36,3 +36,41 @@
 .filter-headings {
   justify-content: space-between;
 }
+
+.filter-button {
+  display: none;
+}
+
+@media only screen and (max-width: 950px) {
+  .hide-filter {
+    display: none;
+  }
+  .slider {
+    width: 15rem;
+  }
+  .filter-container {
+    background: var(--classic-color);
+    padding: 1rem 1rem 10rem 1rem;
+    overflow-y: hidden;
+    position: fixed;
+    top: 5rem;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+  }
+  .filter-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+    background-color: var(--primary-color);
+  }
+
+  .filter-button > button {
+    border: 1px solid black;
+  }
+}

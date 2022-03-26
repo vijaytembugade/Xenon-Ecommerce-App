@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth, useCart, useWishList } from "../../Contexts";
 
 import "./Header.css";
 
 const Header = () => {
+  const [dispayNavBar, setDisplatNavbar] = useState("");
   const {
     state: { cartList },
   } = useCart();
@@ -18,6 +19,10 @@ const Header = () => {
   function handleLogout() {
     localStorage.removeItem("AUTH_TOKEN");
     dispatch({ type: "LOGOUT" });
+  }
+
+  function handleResponsiveNavBar() {
+    setDisplatNavbar((prevState) => (prevState === "" ? "display-navbar" : ""));
   }
 
   return (
@@ -37,9 +42,11 @@ const Header = () => {
               }
             >
               <span className="material-icons"> favorite </span>
-              <span className="badge badge-round secondary-bg-color dark-text">
-                {authState.isLoggedIn ? wishList.length : 0}
-              </span>
+              {authState.isLoggedIn && (
+                <span className="badge badge-round secondary-bg-color dark-text">
+                  {wishList.length}
+                </span>
+              )}
             </NavLink>
           </li>
           <li>
@@ -50,11 +57,11 @@ const Header = () => {
               }
             >
               <span className="material-icons"> shopping_cart </span>
-              <span className="badge badge-round secondary-bg-color dark-text">
-                {cartList.length !== 0 && authState.isLoggedIn
-                  ? cartList.length
-                  : 0}
-              </span>
+              {authState.isLoggedIn && (
+                <span className="badge badge-round secondary-bg-color dark-text">
+                  {cartList.length}
+                </span>
+              )}
             </NavLink>
           </li>
           <li>
@@ -94,7 +101,7 @@ const Header = () => {
           {authState.isLoggedIn && (
             <li>
               <button
-                className="btn btn-ternary-outline"
+                className="btn btn-ternary-outline btn-small nav-item"
                 onClick={handleLogout}
               >
                 Logout
@@ -103,38 +110,82 @@ const Header = () => {
           )}
         </ul>
 
-        <div id="hamburger" className="hamburger">
+        <div
+          id="hamburger"
+          className="hamburger"
+          onClick={handleResponsiveNavBar}
+        >
           <span className="material-icons md-36"> menu </span>
         </div>
 
-        <div className="responsive-navbar">
-          {/* <div id="closeNavbar" className="danger-text">
+        <div className={"responsive-navbar " + dispayNavBar}>
+          <div
+            id="closeNavbar"
+            className="danger-text"
+            onClick={handleResponsiveNavBar}
+          >
             <span className="material-icons md-36"> close </span>
             Close
           </div>
-          <a href="#" className={({ isActive }) =>
-                isActive ? "nav-item" + { activeClassName } : "nav-item"
-              }>
-            {" "}
-            Login{" "}
-          </a>
-          <a href="#" className={({ isActive }) =>
-                isActive ? "nav-item" + { activeClassName } : "nav-item"
-              }>
-            Sign Up
-          </a>
-          <a href="#" className={({ isActive }) =>
-                isActive ? "nav-item" + { activeClassName } : "nav-item"
-              }>
+          {!authState.isLoggedIn && (
+            <NavLink
+              to="/login"
+              className="nav-item"
+              onClick={handleResponsiveNavBar}
+            >
+              Login
+            </NavLink>
+          )}
+          {!authState.isLoggedIn && (
+            <NavLink
+              to="/signup"
+              className="nav-item"
+              onClick={handleResponsiveNavBar}
+            >
+              Sign Up
+            </NavLink>
+          )}
+          <NavLink
+            to="/products"
+            className="nav-item "
+            onClick={handleResponsiveNavBar}
+          >
+            Products
+          </NavLink>
+          <NavLink
+            to="/cart"
+            className="nav-item"
+            onClick={handleResponsiveNavBar}
+          >
+            <span className=""> Cart </span>
             <span className="material-icons"> shopping_cart </span>
-            <span className="badge badge-round secondary-bg-color">0</span>
-          </a>
-          <a href="" className={({ isActive }) =>
-                isActive ? "nav-item" + { activeClassName } : "nav-item"
-              }>
-            <span className="material-icons"> shopping_cart </span>
-            <span className="badge badge-round secondary-bg-color">0</span>
-          </a> */}
+            {authState.isLoggedIn && (
+              <span className="badge badge-round secondary-bg-color">
+                {cartList.length}
+              </span>
+            )}
+          </NavLink>
+          <NavLink
+            to="/wishlist"
+            className="nav-item"
+            onClick={handleResponsiveNavBar}
+          >
+            <span className=""> WishList </span>
+            <span className="material-icons"> favorite </span>
+            {authState.isLoggedIn && (
+              <span className="badge badge-round secondary-bg-color">
+                {wishList.length}
+              </span>
+            )}
+          </NavLink>
+          {authState.isLoggedIn && (
+            <button
+              className="btn btn-ternary btn-block nav-item"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </nav>
     </div>
