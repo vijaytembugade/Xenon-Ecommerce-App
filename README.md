@@ -1,14 +1,12 @@
 # Xenon-Stationery - An Ecommerce Web App
 Xenon stationary is online platform for notebooks, diaries and notepads.
 
-## Live preiview Link
+## Live preview Link
 https://xenon-stationery.netlify.app/
 
 ## Tech Stack
 - React
 - MockBee (Mock-backend)
-
-
 
 ## How to Shart on Local
 1. clone the repo `git clone https://github.com/vijaytembugade/Xenon-Ecommerce-App`
