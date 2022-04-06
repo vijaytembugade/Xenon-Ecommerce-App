@@ -8,7 +8,7 @@ https://xenon-stationery.netlify.app/
 - React
 - MockBee (Mock-backend)
 
-## How to Shart on Local
+## How to Start on local system
 1. clone the repo `git clone https://github.com/vijaytembugade/Xenon-Ecommerce-App`
 2. change the directory to cloned repo
 3. open command-prompt or terminal
