@@ -17,7 +17,7 @@ Xenon stationary is online platform for notebooks, diaries and notepads.
 ## Utilization
 - useState and contextAPI
 - useReducer and useContext
-- custome context hooks
+- custom context hooks
 - Frontend authentication(with JWT)
 - Localstorage 
 - React-router-DOM
