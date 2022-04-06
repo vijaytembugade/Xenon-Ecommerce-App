@@ -10,8 +10,8 @@ https://xenon-stationery.netlify.app/
 
 ## How to Shart on Local
 1. clone the repo `git clone https://github.com/vijaytembugade/Xenon-Ecommerce-App`
-2. change directory to cloned repo
-3. oprn command-prompt or terminal
+2. change the directory to cloned repo
+3. open command-prompt or terminal
 4. type `npm install`
 5. then `npm start`
 
