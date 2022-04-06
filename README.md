@@ -14,7 +14,7 @@ Xenon stationary is online platform for notebooks, diaries and notepads.
 - Responsive design
 - Loader
 
-## utilization
+## Utilization
 - useState and contextAPI
 - useReducer and useContext
 - custome context hooks
@@ -24,7 +24,7 @@ Xenon stationary is online platform for notebooks, diaries and notepads.
 - Axios
 
 ## Demo
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/86H3AZVDWAQ)]
+
 
 
 ## Author
