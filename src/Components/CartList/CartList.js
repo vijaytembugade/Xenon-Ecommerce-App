@@ -63,7 +63,7 @@ function CartList({ item }) {
 
   async function handleMoveToWishList(product) {
     try {
-      if (wishListState.wishlist.find((item) => item._id === product._id)) {
+      if (wishListState?.wishlist?.find((item) => item._id === product._id)) {
         throw new Error("Product is already in wishlist!");
       }
       const responce = await axios.post(
