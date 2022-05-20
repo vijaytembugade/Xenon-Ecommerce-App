@@ -42,6 +42,7 @@ const WishListCart = ({ product }) => {
             }
           );
           cartDispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+          handleDeleteFromWishList(product._id);
         }
       } catch (err) {
         console.log(err);
