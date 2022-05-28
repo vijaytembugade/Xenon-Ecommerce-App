@@ -12,3 +12,5 @@ export {
   calculateTotalPrice,
   calculateTotalQuantity,
 } from "./OrderDetails/priceCalculations";
+
+export { loadScript } from "./LoadScript/loadScript";

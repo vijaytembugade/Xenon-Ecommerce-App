@@ -1,15 +1,17 @@
 import React from "react";
-import { useCart } from "../../Contexts";
+import { useAuth, useCart } from "../../Contexts";
 import {
   calculateDeliveryCharges,
   calculateDiscount,
   calculateDiscountPrice,
   calculateTotalPrice,
   calculateTotalQuantity,
+  loadScript,
 } from "../../Utils";
 
 const OrderDetails = () => {
   const { state } = useCart();
+  const { user } = useAuth();
   const { cartList } = state;
 
   const totalDisountedPrice = calculateDiscountPrice(cartList);
@@ -19,10 +21,49 @@ const OrderDetails = () => {
   const deliveryCharges = calculateDeliveryCharges(totalDisountedPrice);
   const totalCharges = totalDisountedPrice + deliveryCharges;
 
+  async function displayRazorpay(e) {
+    e.preventDefault();
+    const response = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!response) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY,
+      currency: "INR",
+      amount: totalCharges * 100,
+      name: "Xenon",
+      description: "Thank you for trusting us",
+      image: "/assets/global/xenon.svg",
+
+      handler: async function (response) {
+        console.log(response);
+        const { razorpay_payment_id } = await response;
+        const orderData = {
+          orderAmount: totalCharges,
+          razorpayId: razorpay_payment_id,
+        };
+        console.log(orderData);
+      },
+      prefill: {
+        name: user,
+        contact: "8381050637",
+        email: "vijaytembugade@gmail.com",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
+
   return (
     <>
       <div className="order-details">
-        <form className="form-group">
+        <form className="form-group" onSubmit={displayRazorpay}>
           <h2>Order details</h2>
           <div className="price-details">
             <div>
@@ -50,7 +91,9 @@ const OrderDetails = () => {
               <strong>Rs. {totalCharges}</strong>
             </div>
           </div>
-          <button className="btn btn-large btn-secondary">Place Order</button>
+          <button className="btn btn-large btn-secondary" type="submit">
+            Place Order
+          </button>
         </form>
       </div>
     </>
