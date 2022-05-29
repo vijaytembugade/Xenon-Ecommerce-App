@@ -4,6 +4,7 @@ import HomePage from "./Screens/Home/HomePage";
 import ProductListing from "./Screens/ProductListing/ProductListing";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
+import Toast from "./Components/Toast/Toast";
 import SignUp from "./Screens/SignUp/SignUp";
 import Login from "./Screens/Login/Login";
 import Wishlist from "./Screens/Wishlist/Wishlist";
@@ -14,6 +15,7 @@ import PrivateRoutes from "./Components/PrivateRoutes/PrivateRoutes";
 function App() {
   return (
     <>
+      <Toast />
       <Header />
       <div className="main-container">
         <Routes>

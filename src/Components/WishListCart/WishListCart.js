@@ -3,6 +3,7 @@ import React from "react";
 import { useAuth, useCart, useWishList } from "../../Contexts";
 import Rating from "../Rating/Rating";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const WishListCart = ({ product }) => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const WishListCart = ({ product }) => {
           type: "MOVE_TO_WISHLIST",
           payload: [...responce.data.wishlist],
         });
+        toast.success("Product Deleted From wishlist");
       } catch (error) {
         console.log(error);
       }
@@ -32,7 +34,7 @@ const WishListCart = ({ product }) => {
     if (authState.isLoggedIn) {
       try {
         if (cartState.cartList.find((item) => item._id === product._id)) {
-          throw new Error("Item already in cart");
+          throw new Error("Item already in the cart");
         } else {
           const responce = await axios.post(
             "/api/user/cart",
@@ -43,8 +45,10 @@ const WishListCart = ({ product }) => {
           );
           cartDispatch({ type: "SET_CART", payload: [...responce.data.cart] });
           handleDeleteFromWishList(product._id);
+          toast.success("Product moved to cart!");
         }
       } catch (err) {
+        toast.error(err.message);
         console.log(err);
       }
     } else {

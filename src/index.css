@@ -24,3 +24,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gray-color);
 }
+
+.toast-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.6rem;
+}
+.toast-done-btn {
+  margin-top: 1rem;
+}

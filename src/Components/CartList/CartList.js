@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import toast from "react-hot-toast";
 import { useAuth, useCart, useWishList } from "../../Contexts";
 
 function CartList({ item }) {
@@ -15,6 +16,7 @@ function CartList({ item }) {
         },
       });
       dispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+      toast.success("Product deleted from cart!");
     } catch (err) {
       console.log(err.message);
     }
@@ -63,7 +65,7 @@ function CartList({ item }) {
 
   async function handleMoveToWishList(product) {
     try {
-      if (wishListState?.wishlist?.find((item) => item._id === product._id)) {
+      if (wishListState?.wishList?.find((item) => item._id === product._id)) {
         throw new Error("Product is already in wishlist!");
       }
       const responce = await axios.post(
@@ -77,12 +79,23 @@ function CartList({ item }) {
           },
         }
       );
+      const responceOfCart = await axios.delete(
+        `/api/user/cart/${product._id}`,
+        {
+          headers: {
+            authorization: authState.token,
+          },
+        }
+      );
+      dispatch({ type: "SET_CART", payload: [...responceOfCart.data.cart] });
 
       wishlistDispatch({
         type: "MOVE_TO_WISHLIST",
         payload: [...responce.data.wishlist],
       });
+      toast.success("Product moved to the wishlist!");
     } catch (error) {
+      toast.error(error.message);
       console.log(error);
     }
   }

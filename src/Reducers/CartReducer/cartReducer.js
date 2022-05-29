@@ -34,6 +34,9 @@ const cartReducer = (state, action) => {
         ],
       };
     }
+    case "EMPTY_THE_CART": {
+      return { ...state, cartList: [] };
+    }
   }
 };
 

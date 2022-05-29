@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth, useCart } from "../../Contexts";
+import toast from "react-hot-toast";
 import {
   calculateDeliveryCharges,
   calculateDiscount,
@@ -8,9 +9,11 @@ import {
   calculateTotalQuantity,
   loadScript,
 } from "../../Utils";
+import { useNavigate } from "react-router-dom";
 
 const OrderDetails = () => {
-  const { state } = useCart();
+  const navigate = useNavigate();
+  const { state, dispatch } = useCart();
   const { user } = useAuth();
   const { cartList } = state;
 
@@ -47,8 +50,35 @@ const OrderDetails = () => {
           orderAmount: totalCharges,
           razorpayId: razorpay_payment_id,
         };
-        console.log(orderData);
+        toast(
+          (t) => (
+            <div>
+              <h2>Order Successfull!</h2>
+              <div className="toast-container">
+                <span>
+                  Order Id:
+                  <strong>{orderData.razorpayId.split("_")[1]}</strong>
+                </span>
+                <span>
+                  Order Amount: <strong>{orderData.orderAmount} Rs.</strong>
+                </span>
+              </div>
+              <button
+                className="btn btn-ternary btn-small toast-done-btn"
+                onClick={() => {
+                  toast.dismiss(t.id);
+                  navigate("/products");
+                  dispatch({ type: "EMPTY_THE_CART" });
+                }}
+              >
+                Done
+              </button>
+            </div>
+          ),
+          { duration: Infinity }
+        );
       },
+
       prefill: {
         name: user,
         contact: "8381050637",

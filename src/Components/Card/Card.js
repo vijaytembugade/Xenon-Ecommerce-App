@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth, useCart, useWishList } from "../../Contexts";
 import Rating from "../Rating/Rating";
@@ -29,6 +30,7 @@ const Card = ({ product }) => {
           }
         );
         dispatch({ type: "SET_CART", payload: [...responce.data.cart] });
+        toast.success("Product Added In Cart!");
       } catch (err) {
         console.log(err);
       }
@@ -51,6 +53,7 @@ const Card = ({ product }) => {
           type: "MOVE_TO_WISHLIST",
           payload: [...responce.data.wishlist],
         });
+        toast.success("Product Added In Wishlist!");
       } catch (err) {
         console.log(err);
       }
@@ -69,6 +72,7 @@ const Card = ({ product }) => {
           type: "MOVE_TO_WISHLIST",
           payload: [...responce.data.wishlist],
         });
+        toast.success("Product removed From wishlist!");
       } catch (err) {
         console.log(err);
       }
