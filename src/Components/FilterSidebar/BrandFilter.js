@@ -10,24 +10,32 @@ const options = [
 ];
 
 const BrandFilter = () => {
-  const { state, dispatch } = useFilter();
+  const {
+    state: { brand },
+    dispatch,
+  } = useFilter();
 
-  const [selectedOption, setSelectedOption] = useState(state.brand);
+  const [selectedOption, setSelectedOption] = useState([]);
 
   useEffect(() => {
-    const brand = selectedOption.map((value) => {
-      return value.value;
-    });
+    setSelectedOption(brand.map((value) => ({ value: value, label: value })));
+  }, [brand]);
 
-    dispatch({ type: "FILTER_BY_BRAND", payload: brand });
-  }, [selectedOption]);
+  const handleBrandChnage = (select) => {
+    setSelectedOption(select);
+    dispatch({
+      type: "FILTER_BY_BRAND",
+      payload: select.map((value) => value.value),
+    });
+  };
 
   return (
     <div>
       <h3>Select Brands</h3>
       <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
+        value={selectedOption}
+        onChange={handleBrandChnage}
+        placeholder="brands"
         options={options}
         isMulti={true}
       />

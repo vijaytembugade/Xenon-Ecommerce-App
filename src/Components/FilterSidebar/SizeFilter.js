@@ -9,24 +9,32 @@ const options = [
 ];
 
 const SizeFilter = () => {
-  const { dispatch } = useFilter();
+  const {
+    state: { size },
+    dispatch,
+  } = useFilter();
 
   const [selectedOption, setSelectedOption] = useState([]);
 
   useEffect(() => {
-    const size = selectedOption.map((value) => {
-      return value.value;
-    });
+    setSelectedOption(size.map((value) => ({ value: value, label: value })));
+  }, [size]);
 
-    dispatch({ type: "FILTER_BY_SIZE", payload: size });
-  }, [selectedOption]);
+  const handleSizeChnage = (select) => {
+    setSelectedOption(select);
+    dispatch({
+      type: "FILTER_BY_SIZE",
+      payload: select.map((value) => value.value),
+    });
+  };
 
   return (
     <div>
       <h3>Select Sizes</h3>
       <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
+        value={selectedOption}
+        onChange={handleSizeChnage}
+        placeholder="sizes"
         options={options}
         isMulti={true}
       />
