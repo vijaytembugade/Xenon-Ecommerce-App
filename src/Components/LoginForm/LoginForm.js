@@ -41,8 +41,8 @@ const LoginForm = () => {
   }
 
   function setTestLogin() {
-    setEmail("adarshbalika@gmail.com");
-    setPassword("adarshBalika123");
+    setEmail("vijaytembugade21@gmail.com");
+    setPassword("Vijay@123");
   }
   return (
     <>
